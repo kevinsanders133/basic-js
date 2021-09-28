@@ -14,7 +14,21 @@ import { NotImplementedError } from '../extensions/index.js';
  * For 00-1B-63-84-45-E6, the output should be true.
  *
  */
-export default function isMAC48Address(/* n */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function isMAC48Address(inputString) {
+  const arr = String(inputString).split('-');
+  if (arr.length == 6) {
+      for (let i = 0; i < arr.length; i++) {
+          if (arr[i].length == 2) {
+              const t1 = arr[i][0];
+              const t2 = arr[i][1];
+              if (!((t1 >= '0' && t1 <= '9' || t1 >= 'A' && t1 <= 'F') &&
+                    (t2 >= '0' && t2 <= '9' || t2 >= 'A' && t2 <= 'F'))) {return false}
+          } else {
+              return false;
+          }
+      }
+  } else {
+      return false;
+  }
+  return true;
 }

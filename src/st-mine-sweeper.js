@@ -23,7 +23,54 @@ import { NotImplementedError } from '../extensions/index.js';
  *  [1, 1, 1]
  * ]
  */
-export default function minesweeper (/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function minesweeper(matrix) {
+  let newMatrix = [];
+  for (let i = 0; i < matrix.length; i++) {
+      newMatrix.push([]);
+      for (let j = 0; j < matrix[0].length; j++) {
+          newMatrix[i].push(0);
+      }
+  }
+  for (let y = 0; y < matrix.length; y++) {
+      for (let x = 0; x < matrix[0].length; x++) {
+          if (matrix[y][x] == true) {
+              newMatrix[y][x] = 1;
+          } else {
+              if (matrix[y - 1] !== undefined && matrix[y - 1][x] !== undefined) {
+                  if (matrix[y - 1][x])
+                      newMatrix[y][x]++;
+              }
+              if (matrix[y - 1] !== undefined && matrix[y - 1][x + 1] !== undefined) {
+                  if (matrix[y - 1][x + 1])
+                      newMatrix[y][x]++;
+              }
+              if (matrix[y] !== undefined && matrix[y][x + 1] !== undefined) {
+                  if (matrix[y][x + 1])
+                      newMatrix[y][x]++;
+              }
+              if (matrix[y + 1] !== undefined && matrix[y + 1][x + 1] !== undefined) {
+                  if (matrix[y + 1][x + 1])
+                      newMatrix[y][x]++;
+              }
+              if (matrix[y + 1] !== undefined && matrix[y + 1][x] !== undefined) {
+                  if (matrix[y + 1][x])
+                      newMatrix[y][x]++;
+              }
+              if (matrix[y + 1] !== undefined && matrix[y + 1][x - 1] !== undefined) {
+                  if (matrix[y + 1][x - 1])
+                      newMatrix[y][x]++;
+              }
+              if (matrix[y] !== undefined && matrix[y][x - 1] !== undefined) {
+                  if (matrix[y][x - 1]) 
+                      newMatrix[y][x]++;
+              }
+              if (matrix[y - 1] !== undefined && matrix[y - 1][x - 1] !== undefined) {
+                  if (matrix[y - 1][x - 1])
+                      newMatrix[y][x]++;
+              }
+          }
+      }
+  }
+  return newMatrix;
 }
+
